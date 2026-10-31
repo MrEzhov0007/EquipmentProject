@@ -16,7 +16,7 @@ class Program
         };
 
         Console.Write("Введите название оборудования: ");
-        string query = Console.ReadLine() ?? string.Empty;
+        string query = Console.ReadLine()?.Trim() ?? string.Empty;
 
         if (string.IsNullOrWhiteSpace(query))
         {
