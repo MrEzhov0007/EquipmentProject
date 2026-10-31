@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class Program
 {
@@ -14,8 +15,26 @@ class Program
             "Системный блок"
         };
 
-        Console.WriteLine("Список оборудования:");
-        foreach (string item in equipment)
+        Console.Write("Введите название оборудования: ");
+        string query = Console.ReadLine()?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            Console.WriteLine("Поисковый запрос не может быть пустым.");
+            return;
+        }
+
+        var results = equipment
+            .Where(item => item.Contains(query, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (results.Count == 0)
+        {
+            Console.WriteLine("Оборудование не найдено.");
+            return;
+        }
+
+        foreach (string item in results)
         {
             Console.WriteLine(item);
         }
